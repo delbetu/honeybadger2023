@@ -2,12 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: convert into a class
-# just trying to understand its API on beforehand
-SlackNotifier = Class.new do
-  def notify_spam(message); end
-end
-
 describe SpamChecker do
   subject(:process_message) { described_class.new.process(message, notifier:) }
   let(:notifier) { instance_double(SlackNotifier, notify_spam: nil) }

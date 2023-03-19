@@ -2,11 +2,6 @@
 
 require 'rails_helper'
 
-# TODO: delete after this class is implemented
-SpamChecker = Class.new do
-  def self.process(msg); end
-end
-
 RSpec.describe '/messages', type: :request do
   let(:message_attributes) do
     {

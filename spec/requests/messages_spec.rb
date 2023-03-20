@@ -5,19 +5,16 @@ require 'rails_helper'
 RSpec.describe '/messages', type: :request do
   let(:message_attributes) do
     {
-      'id' => 1,
-      'record_type' => 'Bounce',
-      'type' => 'SpamNotification',
-      'type_code' => 512,
-      'name' => 'Spam notification',
-      'tag' => '',
-      'message_stream' => 'outbound',
-      'description' => "The message was delivered,
-      but was either blocked by the user,
-      or classified as spam, bulk mail, or had rejected content.",
-      'email' => 'zaphod@example.com',
-      'from' => 'notifications@honeybadger.io',
-      'bounced_at' => '2023-02-27T21:41:30Z'
+      "RecordType": 'Bounce',
+      "Type": 'SpamNotification',
+      "TypeCode": 512,
+      "Name": 'Spam notification',
+      "Tag": '',
+      "MessageStream": 'outbound',
+      "Description": 'The message was delivered, but was either blocked by the user, or classified as spam, bulk mail, or had rejected content.',
+      "Email": 'zaphod@example.com',
+      "From": 'notifications@honeybadger.io',
+      "BouncedAt": '2023-02-27T21:41:30Z'
     }
   end
   let(:stub_api_call) do

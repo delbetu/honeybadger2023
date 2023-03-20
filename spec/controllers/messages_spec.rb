@@ -8,9 +8,9 @@ RSpec.describe MessagesController do
       {
         'id' => 1,
         'record_type' => 'Bounce',
-        'message_type' => 'spam_notification',
+        'type' => 'SpamNotification',
         'type_code' => 512,
-        'name' => 'spam notification',
+        'name' => 'Spam notification',
         'tag' => '',
         'message_stream' => 'outbound',
         'description' => "The message was delivered,
@@ -41,14 +41,15 @@ RSpec.describe MessagesController do
 
     context 'when spam checker fails during execution' do
       before do
-        allow(SpamChecker).to receive(:process).and_return(double(success: false, errors: ['something bad happened']))
+        allow(SpamChecker).to receive(:process).and_return(double(success: false,
+                                                                  errors: ['Some error occurred. Try again later.']))
       end
 
       it 'returns error' do
         post_create
         expect(response).to have_http_status(:unprocessable_entity)
         expect(JSON.parse(response.body)).to match(
-          'status' => 'error', 'message' => 'something bad happened'
+          'status' => 'error', 'message' => 'Some error occurred. Try again later.'
         )
         expect(response.content_type).to match(a_string_including('application/json'))
       end

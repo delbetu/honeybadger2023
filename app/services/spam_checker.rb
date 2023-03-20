@@ -23,9 +23,9 @@ class SpamChecker
 
   # fail if required attrs are not present
   def email(message_hash) = message_hash.fetch(:email)
-  def message_type(message_hash) = message_hash.fetch(:type)
+  def type(message_hash) = message_hash.fetch(:type)
   def bounced_at(message_hash) = DateTime.parse(message_hash.fetch(:bounced_at)).strftime('%+')
   def from(message_hash) = message_hash.fetch(:from)
 
-  def spam?(message_hash) = message_type(message_hash).casecmp?('spamnotification')
+  def spam?(message_hash) = type(message_hash).casecmp?('spamnotification')
 end

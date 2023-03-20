@@ -18,7 +18,7 @@ class MessagesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def message_params
     params.permit(
-      :record_type, :message_type, :type_code,
+      :record_type, :type, :type_code,
       :name, :tag, :message_stream,
       :description, :email, :from, :bounced_at
     )

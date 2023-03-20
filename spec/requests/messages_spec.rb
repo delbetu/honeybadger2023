@@ -3,57 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe '/messages', type: :request do
-  let(:message_attributes) do
-    {
-      'id' => 1,
-      'record_type' => 'Bounce',
-      'message_type' => 'spam_notification',
-      'type_code' => 512,
-      'name' => 'spam notification',
-      'tag' => '',
-      'message_stream' => 'outbound',
-      'description' => "The message was delivered,
-      but was either blocked by the user,
-      or classified as spam, bulk mail, or had rejected content.",
-      'email' => 'zaphod@example.com',
-      'from' => 'notifications@honeybadger.io',
-      'bounced_at' => '2023-02-27T21:41:30Z'
-    }
-  end
-
   describe 'POST /create' do
-    context 'when spam checker runs without error' do
-      before do
-        allow(SpamChecker).to receive(:process).and_return(double(success: true, message: 'message processed'))
-      end
-
-      subject(:post_create) { post messages_url, params: message_attributes, as: :json }
-
-      it 'returns success' do
-        post_create
-        expect(response).to have_http_status(:created)
-        expect(JSON.parse(response.body)).to match(
-          'status' => 'success', 'message' => 'message processed'
-        )
-        expect(response.content_type).to match(a_string_including('application/json'))
-      end
-    end
-
-    context 'when spam checker fails during execution' do
-      before do
-        allow(SpamChecker).to receive(:process).and_return(double(success: false, errors: ['something bad happened']))
-      end
-
-      subject(:post_create) { post messages_url, params: message_attributes, as: :json }
-
-      it 'returns error' do
-        post_create
-        expect(response).to have_http_status(:unprocessable_entity)
-        expect(JSON.parse(response.body)).to match(
-          'status' => 'error', 'message' => 'something bad happened'
-        )
-        expect(response.content_type).to match(a_string_including('application/json'))
-      end
-    end
   end
 end

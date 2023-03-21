@@ -18,6 +18,9 @@ While requirements do not grow much the rails way approach is simple to maintain
 
 I chose the first approach here to demonstrate that I can think about design and unit-test apprioriately.
 
+Follow [the commits](https://github.com/delbetu/honeybadger2023/commits/main) if you want to see the construction process:
+
+
 ## Time spent
 
 Estimated dedication around 4 hrs total.
